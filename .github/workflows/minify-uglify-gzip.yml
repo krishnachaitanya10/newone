@@ -20,18 +20,20 @@ jobs:
 
     - name: Minify and Uglify
       run: |
-        npx terser src/yourfile.js -o dist/yourfile.min.js
+        npx terser cursor\(1\).js -o dist/cursor.min.js
+      working-directory: ${{ github.workspace }}/src
 
     - name: Gzip
       run: |
-        npx gzip-cli dist/yourfile.min.js -o dist/yourfile.min.js.gz
+        npx gzip-cli dist/cursor.min.js -o dist/cursor.min.js.gz
+      working-directory: ${{ github.workspace }}/src
 
     - name: Commit and push changes
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add dist/yourfile.min.js dist/yourfile.min.js.gz
-        git commit -m 'Minified, uglified, and gzipped the files'
+        git add dist/cursor.min.js dist/cursor.min.js.gz
+        git commit -m 'Minified, uglified, and gzipped the cursor.js file'
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
